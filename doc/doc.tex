@@ -1,0 +1,2525 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[left=2cm,right=2cm,top=3cm,bottom=3cm]{geometry}
+\usepackage[czech]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{url}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{siunitx}
+\usepackage{amsmath}
+\usepackage{accents}
+\usepackage{comment}
+\usepackage{listings}
+\usepackage{csquotes}
+\usepackage{hyperref}
+\usepackage{textcomp}
+\usepackage{amsfonts}
+\usepackage{breakurl}
+\usepackage{etoolbox}
+\usepackage{graphicx}
+\usepackage{etoolbox}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{indentfirst}
+\usepackage{supertabular}
+\usepackage[titles]{tocloft}
+\usepackage{enumitem}
+
+\def\UrlBreaks{\do\/\do-} % URL breaking characters
+
+\newcommand{\red}[1]{\textcolor{red}{#1}} % \red{text in red}
+\newcommand{\blue}[1]{\textcolor{blue}{#1}} % \blue{text in blue}
+\newcommand{\TODO}{\textbf{\textcolor{red}{TODO}}} % red bold TODO
+\newcommand{\tilda}{\raisebox{0.5ex}{\texttildelow}} % command \tilda for '~' character
+
+\newcounter{para}
+\newcommand\mypara{\par\refstepcounter{para}\thepara.\space}
+
+\renewcommand{\cftdot}{}
+
+\setlength\parindent{0pt} % do NOT indent
+\graphicspath{{img/}} % path to images
+
+\patchcmd{\thebibliography}{\section*{\refname}}{}{}{}
+
+\begin{document}
+
+\newgeometry{left=2cm,right=2cm,top=3cm,bottom=3cm}
+
+\begin{titlepage}
+
+    \begin{center}
+        % FIX: lines must end with '%', if not then it will result in an incorrect centering
+        \vfill {%
+            \Huge{%
+                \textsc{%
+                    Fakulta informatiky\\[3mm]%
+                    Masarykova univerzita%
+                }%
+            }%
+        }%
+
+        \hfill\\[15mm]
+
+        \begin{figure}[!h]
+            \centering
+            \includegraphics[scale=3]{muni-fi-logo.pdf}
+        \end{figure}
+
+        \hfill\\[10mm]
+
+        \Huge{
+            \textbf{
+                PV157
+            }
+        }
+
+        \hfill\\[-10mm]
+
+        \huge{
+            \textbf{
+                Autentizace a řízení přístupu
+            }
+        }
+
+        \hfill\\[10mm]
+
+        \LARGE{
+            \textbf{
+                Otázky
+            }
+        }
+        \vfill
+
+        \Large{
+            \today
+        }
+
+    \end{center}
+\end{titlepage}
+
+\newpage
+
+\newgeometry{left=1cm,right=1cm,top=1cm,bottom=2cm}
+
+\section*{Multiple choice}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Generátory passcode slouží pro}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Urychlení generování sekvenčních čísel\\[-7.5mm]
+    \item Bezpečné uložení dlouhodobých klíčů\\[-7.5mm]
+    \item Realizaci challenge-response (výzva-odpověď) protokolu\\[-7.5mm]
+    \item Personalizaci elektronických pasů\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b, c\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Český elektronický pas druhé generace s autentizací čipu:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Lze naklonovat snadno, pokud známe data z MRZ\\[-7.5mm]
+    \item Nelze snadno naklonovat (vyžaduje získání soukromého klíče pasu, který nelze z pasu vyčíst) a proto klonovaní českého pasu zatím nebylo veřejně  předvedeno.\\[-7.5mm]
+    \item Lze naklonovat jen pokud spolupracuje skutečný držitel pasu a zná svůj PIN\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Jaký typ pamětí je typicky používán u současných čipových karet?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item DRAM\\[-7.5mm]
+    \item SRAM\\[-7.5mm]
+    \item GRAM\\[-7.5mm]
+    \item EEPROM\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Které z následujících dělení modelů řízení přístupu není používáno:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item řízené pravidly / náhodné\\[-7.5mm]
+    \item seznam přístupových oprávnění (capabilities) / seznam přístupových práv (ACL)\\[-7.5mm]
+    \item synchronní / asynchronní\\[-7.5mm]
+    \item symetrické / asymetrické\\[-7.5mm]
+    \item volitelné / povinné\\[-7.5mm]
+    \item centralizované / decentralizované\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, c, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Komerční biometrická řešení oproti forenzním nabízí}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item plně automatizované systémy.\\[-7.5mm]
+    \item možnost opakovaného vytvoření nedostatečně kvalitních registračních vzorků.\\[-7.5mm]
+    \item vyšší přesnost.\\[-7.5mm]
+    \item uchování zpracovaných charakteristik včetně biometrických vzorků.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, b\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Slabá bezkoliznost u hašovacích funkcí znamená}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Pro dané x nejsme schopni v rozumném čase najít y!=x tak, že h(x)=h(y)\\[-7.5mm]
+    \item Pro dané x nejsme schopni v rozumném čase najít y!=x tak, že h(x)=y\\[-7.5mm]
+    \item Pro dané x nejsme schopni v rozumném čase najít y!=x tak, že x=h(y)\\[-7.5mm]
+    \item V rozumném čase nejsme schopni nalézt x, y (x=y) tak, že h(x)!=h(y)\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Z jakých šifrovacích algoritmů se obvykle tvoří hašovací funkce?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Asymetrická šifra\\[-7.5mm]
+    \item Hašovací funkci nelze vytvořit z žádného šifrovacího algoritmu\\[-7.5mm]
+    \item Proudová symetrická šifra\\[-7.5mm]
+    \item Bloková symetrická šifra\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Biometriky jsou}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item automatizované metody identifikace nebo ověření identity.\\[-7.5mm]
+    \item založeny na opakovatelně měřitelných fyziologických nebo behaviorálních vlastnostech člověka.\\[-7.5mm]
+    \item založeny na neopakovatelně měřitelných fyziologických nebo behaviorálních vlastnostech člověka.\\[-7.5mm]
+    \item i metody identifikace pomocí čipové karty obsahující vzorky člověka.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, b\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara V tiketu používaném v systému Kerberos se objevuje:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Identifikátor alespoň jedné ze stran\\[-7.5mm]
+    \item Soukromý klíč\\[-7.5mm]
+    \item Náhodná výzva\\[-7.5mm]
+    \item Časové razítko\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Řízení přístupu, při němž vlastník rozhoduje o přístupech ke svým souborům, se     nazývá:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Princip maximálních privilegií.\\[-7.5mm]
+    \item Flexibilní řízení přístupu.\\[-7.5mm]
+    \item Volitelné řízení přístupu.\\[-7.5mm]
+    \item Povinné řízení přístupu.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: c\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Útok na čipové karty pomocí časové analýzy využívá:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Délka operace v závislosti na vykonané větvi kódu.\\[-7.5mm]
+    \item Délka operace v závislosti na zpracovávaných datech.\\[-7.5mm]
+    \item Závislost průběhu odběru proudu na prováděné instrukci.\\[-7.5mm]
+    \item Závislost průběhu odběru proudu na zpracovávaných datech.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, b\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Mezi vlastnosti (axiomy) modelu Bell-LaPadula patří}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item procesy nesmějí zapisovat data do nižší úrovně\\[-7.5mm]
+    \item procesy nesmějí číst data na vyšší úrovni\\[-7.5mm]
+    \item procesy nesmějí číst data z nižší úrovně\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, b\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Německý elektronický pas druhé generace s autentizací čipu:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Lze naklonovat snadno, pokud známe data z MRZ\\[-7.5mm]
+    \item Nelze snadno naklonovat (vyžaduje získání soukromého klíče pasu, který nelze z pasu vyčíst).\\[-7.5mm]
+    \item Lze naklonovat jen pokud spolupracuje skutečný držitel pasu a zná svůj PIN\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Soubor /etc/shadow obsahuje}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Informaci o délce hesla\\[-7.5mm]
+    \item Datum a čas posledního úspěšného přihlášení do systému\\[-7.5mm]
+    \item Počet neúspěšných pokusů o zadání hesla\\[-7.5mm]
+    \item Haše hesel uživatelů\\[-7.5mm]
+    \item Informaci o tom, že haše hesel jsou v souboru /etc/passwd\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Snímače otisků prstů jsou}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item inkoustové (tryskové)\\[-7.5mm]
+    \item kapacitní\\[-7.5mm]
+    \item polyadické\\[-7.5mm]
+    \item optické\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Která z uvedených tvrzení jsou pravdivá:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Autentizace pomocí IP adresy může být použita pouze v kombinaci s MAC adresou.\\[-7.5mm]
+    \item Autentizace pomocí IP adresy je výrazně bezpečnější než autentizace pomocí MAC adresy.\\[-7.5mm]
+    \item Autentizace pomocí IP adresy je výrazně méně bezpečná než autentizace pomocí MAC adresy.\\[-7.5mm]
+    \item Autentizace pomocí IP adresy není spolehlivá, protože IP může být změněna.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Protokol Kerberos zajišťuje}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Autentizaci\\[-7.5mm]
+    \item Aprobaci\\[-7.5mm]
+    \item Autokracii\\[-7.5mm]
+    \item Akumulaci\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Pro statickou autentizaci dat (SDA) platí, že:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Potvrzuje pravost pouze statických dat uložených v čipové kartě.\\[-7.5mm]
+    \item Je prováděna pouze platebním terminálem (čip pouze zasílá data)\\[-7.5mm]
+    \item Řeší problém padělání/duplikace karet\\[-7.5mm]
+    \item Potvrzuje pravost statických dat uložených v čipové kartě, ale i dynamických dat zaslaných terminálem\\[-7.5mm]
+    \item Je prováděna pouze čipovou kartou (terminál pouze zasílá data)\\[-7.5mm]
+    \item Potvrzuje pravost statických uložených v čipové kartě, ale i dynamických dat zaslaných čipem\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, b\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara V současných SIM (Subscriber Identity Module) kartách pro GSM sítě je uložen:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Statická aplikační data a veřejný certifikát operátora\\[-7.5mm]
+    \item Asymetrický klíč\\[-7.5mm]
+    \item Symetrický klíč\\[-7.5mm]
+    \item Statická aplikační data podepsána soukromým klíčem karty\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: c\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Jaká technologie přihlašování do systému e-bankovnictví (a autorizace transakcí) je nejbezpečnější (z nabízených možností)?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Použití autentizačního kalkulátoru s PINem\\[-7.5mm]
+    \item Použití hesla zadaného částečně na klávesnici a částečně na virtuální klávesnici\\[-7.5mm]
+    \item Použití šifrované autentizační SMS (tj. s využitím SIM Toolkitu)\\[-7.5mm]
+    \item Použití klientského certifikátu, který je uložen na čipové kartě s přístupem chráněným PINem\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Která z následujících tvrzení jsou platná pro protokol SSL/TLS?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Implicitně je autentizace serveru i klienta vypnuta.\\[-7.5mm]
+    \item SSL/TLS protokol neprovádí elektronické podepisování dat.\\[-7.5mm]
+    \item Implicitně je autentizace serveru a klienta povinná.\\[-7.5mm]
+    \item Implicitně je autentizace serveru povinná, autentizace klienta je volitelná.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Která z uvedených tvrzení o uživatelově PINu jsou pravdivá (při standardním nastavení karty)?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Při změně nezablokovaného PINu je třeba zadat starý i nový uživatelský PIN.\\[-7.5mm]
+    \item Při změně nezablokovaného PINu stačí zadat nový uživatelský PIN.\\[-7.5mm]
+    \item Při změně zablokovaného PINu je třeba zadat starý i nový uživatelský PIN.\\[-7.5mm]
+    \item Při změně zablokovaného PINu je třeba zadat odblokovací PIN a nový uživatelský PIN.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Praktické problémy biometrik jsou}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item uživatelé s poškozenými či chybějícími orgány.\\[-7.5mm]
+    \item legislativa a správa charakteristik.\\[-7.5mm]
+    \item nízké FRR (nespokojení uživatelé z důvodu častého odmítnutí).\\[-7.5mm]
+    \item nízké FAR (aplikace s nízkou úrovní bezpečnosti).\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, b\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Autentizace dat znamená}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Totéž co integrita\\[-7.5mm]
+    \item Potvrzení, že data nebyla neautorizovaně změněna od doby vytvoření\\[-7.5mm]
+    \item Potvrzení, že data pochází od určitého subjektu\\[-7.5mm]
+    \item Data nemohl odeslat nikdo jiný než jejich původce\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b, c\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Jaké kryptografické techniky lze využít pro implementaci autentizace čipu (jako součást EAC) u elektronických pasů?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item SHA-1 a 3DES\\[-7.5mm]
+    \item Diffie-Hellman\\[-7.5mm]
+    \item SHA-1 a DSA\\[-7.5mm]
+    \item Fiat-Shamir\\[-7.5mm]
+    \item PGP\\[-7.5mm]
+    \item SHA-2 a AES\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Detekcí narušení se u čipových karet myslí:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Po narušení jsou stopy narušení obtížně odstranitelné.\\[-7.5mm]
+    \item Odolnost proti pokusům o zjištění robustnosti vůči fyzickým útokům.\\[-7.5mm]
+    \item Vlastnost části systému umožňující detekovat fyzický útok.\\[-7.5mm]
+    \item Při zjištění narušení je automaticky provedena chráněnou části obranná akce.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: c\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Odpovědí na narušení se u čipových karet myslí:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Automatická akce provedená chráněnou částí při detekci pokusu o narušení.\\[-7.5mm]
+    \item Po úspěšném provedení narušení jsou stopy narušení odstraněny.\\[-7.5mm]
+    \item Vlastnost části systému umožňující detekovat fyzický útok.\\[-7.5mm]
+    \item Akce provedená bezpečnostním administrátorem po zjištění pokusu o narušení.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Běžné komerční biometrické zařízení}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item je vybaveno detekcí průniku nebo má zvýšenou odolnost proti průniku.\\[-7.5mm]
+    \item typicky dobře šifruje přenášená data pomocí kvalitních algoritmů.\\[-7.5mm]
+    \item se neautentizuje vůči dalším komunikujícím.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: c\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Které z uvedených režimů nepodporuje IPsec:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Transportní režim.\\[-7.5mm]
+    \item Dynamický virtuální režim.\\[-7.5mm]
+    \item Tunelovací režim.\\[-7.5mm]
+    \item Překladový režim.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Který z výroků o autentizaci na základě dynamiky psaní na klávesnici je pravdivý?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Měří se čas stlačení klávesy a čas mezi stisky kláves.\\[-7.5mm]
+    \item Uživatele je možno autentizovat kontinuálně.\\[-7.5mm]
+    \item K autentizaci stačí běžná klávesnice.\\[-7.5mm]
+    \item Algoritmy pracují na principu srovnávání vzorů (pattern matching) nebo neuronových sítí (neural networks).\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, b, c, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Na jakém problému je založena bezpečnost RSA}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Obchodní cestující\\[-7.5mm]
+    \item Eliptické křivky\\[-7.5mm]
+    \item Faktorizace čísel\\[-7.5mm]
+    \item Diskrétní logaritmus\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: c\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Jednosměrnost u kryptografických hašovacích funkcí znamená}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item V rozumném čase nejsme schopni najít x, y tak, aby h(x)=h(y)\\[-7.5mm]
+    \item Pro dané y nelze v rozumném čase najít x tak, aby h(x)=y\\[-7.5mm]
+    \item Pro dané h(y) nelze v rozumném čase najít x tak, aby h(x)=h(y)\\[-7.5mm]
+    \item Pro dané y lze v rozumném čase najít x tak, aby h(x)=y\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Které z uvedených kategorií čipových karet podle technologie komunikace rozlišujeme?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Hybridní karty.\\[-7.5mm]
+    \item Bezkontaktní karty.\\[-7.5mm]
+    \item Kontaktní karty.\\[-7.5mm]
+    \item Polymorfní karty.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b, c\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Na jakém druhu kryptografie je založena základní verze Kerbera?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Hybridní\\[-7.5mm]
+    \item Symetrická\\[-7.5mm]
+    \item Asymetrická\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Biometrické charakteristiky se dělí na}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item geotypické\\[-7.5mm]
+    \item genotypické\\[-7.5mm]
+    \item biomatické\\[-7.5mm]
+    \item fenotypické\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Aktualizace klíče se vzájemnou autentizací protokolem AKEP2 (Authenticated Key Exchange Protocol 2)je založena na:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Generátorech passcode\\[-7.5mm]
+    \item Algoritmu MAC (Message Authentication Code)\\[-7.5mm]
+    \item Digitálních podpisech\\[-7.5mm]
+    \item Bez klíčových kryptografických hašovacích funkcích\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Jaká primární autentizační metoda slouží k automatizované verifikaci identity předkladatele pasu?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Znalost tajemství (v tomto případě PINu) zakódovaného v MRZ\\[-7.5mm]
+    \item Znalost tajemství ověřená pomocí protokolu výzva-odpověď\\[-7.5mm]
+    \item V čipu zakódovaný 128bitový identifikátor (platný typicky 10 let)\\[-7.5mm]
+    \item Biometriky (obličej, otisk prstu, duhovka)\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Které protokoly umožňují vytvoření sdíleného tajemství?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Protokoly pro ustavení klíče\\[-7.5mm]
+    \item Protokoly implementované v Kerberu\\[-7.5mm]
+    \item Zero-knowledge protokoly (protokoly s nulovým rozšířením znalostí)\\[-7.5mm]
+    \item Silné autentizační protokoly\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, b\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Pro ověření japonského elektronického pasu na českých hranicích je třeba:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item CSCA certifikát ČR, který je třeba předem získat diplomatickými prostředky\\[-7.5mm]
+    \item CSCA certifikát Japonska, který si držitel pasu může přinést na CD nebo USB flash disku\\[-7.5mm]
+    \item CSCA certifikát Japonska, který je třeba předem získat diplomatickými prostředky\\[-7.5mm]
+    \item DS certifikát, který je možné vyčíst z pasu\\[-7.5mm]
+    \item CSCA certifikát Japonska, který je možné vyčíst z pasu\\[-7.5mm]
+    \item DS certifikát, který který si držitel pasu musí přinést na CD nebo USB flash disku\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: c, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Co je to narozeninový paradox?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Lze jej ilustrovat faktem, že v sále s 23 lidmi je pravděpodobnost stejného data narození dvou lidí větší než 50 \%\\[-7.5mm]
+    \item Situace, kdy se začátkem roků rodí víc mužů než žen\\[-7.5mm]
+    \item Pravděpodobnost nalezení stejného data narození k pevně zvolenému datu je při 23 lidech větší než 50 \%\\[-7.5mm]
+    \item Statisticky podložená vysoká úspěšnost nalezení kolize\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Které z uvedených kategorií čipových karet podle technologie uchování a práce s daty rozlišujeme?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Paměťové karty se speciální logikou.\\[-7.5mm]
+    \item Karty s magnetickým proužkem.\\[-7.5mm]
+    \item Paměťové karty.\\[-7.5mm]
+    \item Procesorové karty.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, c, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Oční duhovka je snímána pomocí}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item ultrafialového paprsku.\\[-7.5mm]
+    \item černobílé kamery.\\[-7.5mm]
+    \item kvalitní barevné kamery.\\[-7.5mm]
+    \item laserového paprsku s třídou bezpečnosti 1.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Mezi chyby biometrických systémů patří}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item ARR (Acceptance Rejection Rate)\\[-7.5mm]
+    \item EDR (Error Disqualification Rate)\\[-7.5mm]
+    \item FAR (False Acceptance Rate)\\[-7.5mm]
+    \item FRR (False Rejection Rate)\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: c, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Jaké jsou možnosti prevence padělání tokenů?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Modifikace dostupného vybavení (modifikace vybraných barev u kopírky, vkládání identifikátoru).\\[-7.5mm]
+    \item Utajení všech informací nutných ke konstrukci tokenu.\\[-7.5mm]
+    \item Utajení některých informací nutných ke konstrukci tokenu.\\[-7.5mm]
+    \item Čestné prohlášení všech uživatelů systému.\\[-7.5mm]
+    \item Kontrola a licence souvisejících živností.\\[-7.5mm]
+    \item Omezení dostupnosti potřebného vybavení.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, c, e, f\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Digitální podpis ověříme pomocí}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Veřejného klíče podepisující osoby\\[-7.5mm]
+    \item Soukromého klíče podepisující osoby\\[-7.5mm]
+    \item Privátního klíče podepisující osoby\\[-7.5mm]
+    \item Certifikátu veřejného klíče podepisující osoby\\[-7.5mm]
+    \item Klíče sdíleného s podepisující osobou\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Které časově proměnné parametry se používají v kryptografických protokolech?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Monoliticky rostoucí sekvence\\[-7.5mm]
+    \item Náhodná komplexní čísla\\[-7.5mm]
+    \item Náhodné sekvence\\[-7.5mm]
+    \item Náhodná časová razítka\\[-7.5mm]
+    \item Náhodná čísla\\[-7.5mm]
+    \item Časová razítka\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: e, f\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara K čemu slouží soubor .rhosts?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item K nastavení adres počítačů s povoleným přihlášením bez další autentizace.\\[-7.5mm]
+    \item Uchování informací o adresách autentizovaných počítačů připojených k serveru.\\[-7.5mm]
+    \item K uchování uživatelů s právem číst (read).\\[-7.5mm]
+    \item K uchování RSA klíče(ů) serveru.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Digitální podpis může vytvořit}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Pouze osoba vlastnící sdílený klíč\\[-7.5mm]
+    \item Pouze osoba vlastnící soukromý klíč\\[-7.5mm]
+    \item Pouze osoba vlastnící veřejný klíč\\[-7.5mm]
+    \item Pouze osoba vlastnící certifikovaný klíč\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Které biometrické charakteristiky bývají nazývány také dynamickými?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item fyziologické\\[-7.5mm]
+    \item genotypické\\[-7.5mm]
+    \item behaviorální\\[-7.5mm]
+    \item fenotypické\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: c\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Které z uvedených útoků na čipové karty nepatří mezi fyzické útoky?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Preparace čipu\\[-7.5mm]
+    \item Odběrová analýza\\[-7.5mm]
+    \item Ozařování čipu\\[-7.5mm]
+    \item Časová analýza\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Jaký je u ssh rozdíl mezi Server key a Host key?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Server key je krátkodobý klíč použitý pro odvození Host key.\\[-7.5mm]
+    \item Host key je dlouhodobý klíč.\\[-7.5mm]
+    \item Server key je krátkodobý klíč použitý pro vlastní autentizaci serveru.\\[-7.5mm]
+    \item Host key je krátkodobý klíč použitý pro vlastní autentizaci serveru.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b, c\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Co nepatří mezi mechanizmy zabraňující jednodušším útokům na e-bankovnictví s autentizací pouze na základě hesla?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Anonymizovaný login
+    \item testy délky a kvality hesla\\[-7.5mm]
+    \item Virtuální klávesnice pro zadávání hesla\\[-7.5mm]
+    \item SSH certifikáty\\[-7.5mm]
+    \item Personalizovaný login\\[-7.5mm]
+    \item SSL certifikáty\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Jaké typy záznamů lze používat na čipové kartě?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Nestrukturovaná data.\\[-7.5mm]
+    \item Exponenciální záznam s pevnou délkou.\\[-7.5mm]
+    \item Lineární záznamy s pevnou nebo variabilní délkou.\\[-7.5mm]
+    \item Cyklické záznamy.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, c, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Biometrické technologie mohou být založeny na některém z těchto typů charakteristik:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item fyziologický\\[-7.5mm]
+    \item morální\\[-7.5mm]
+    \item environmentální\\[-7.5mm]
+    \item behaviorální\\[-7.5mm]
+    \item chemoterapický\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Co je to zaručený elektronický podpis}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Jednoznačně ověřitelný podpis\\[-7.5mm]
+    \item Podpis, který má záruky srovnatelné jako elektronický podpis\\[-7.5mm]
+    \item Elektronický podpis, za který se dokážeme nějak důvěryhodně zaručit\\[-7.5mm]
+    \item Podpis vytvořený pomocí kryptografických prostředků\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Která tvrzení platí pro elektronickou značku}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Elektronické značky jsou jednoznačně spojené s označující osobou a umožňují její identifikaci prostřednictvím kvalifikovaného systémového certifikátu\\[-7.5mm]
+    \item Technologicky jde o totéž co zaručený elektronický podpis\\[-7.5mm]
+    \item Ověření elektronické značky je obtížnější než ověření elektronického podpisu\\[-7.5mm]
+    \item Elektronická značka je ke zprávě připojena tak, že je možné detekovat následné změny ve zprávě\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, b, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Co je to Chaffing and winnowing}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Pro každý bit zprávy vytvoříme dvě zprávy (správný, chybný MAC), příjemce si ponechá zprávu se správným MAC\\[-7.5mm]
+    \item Zprávu rozdělíme na jednotlivé bity a ty šifrujeme z využitím MAC každý zvlášť\\[-7.5mm]
+    \item Každý bit zprávy zkopírujeme několikrát za sebe, aby se předešlo chybám v důsledku chybovosti MAC komunikačního kanálu\\[-7.5mm]
+    \item "Oddělení zrna od plev"\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Jaké jsou obecné nevýhody tokenů?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Cena tokenů je příliš vysoká pro komerční využití.\\[-7.5mm]
+    \item Bez tokenu není autorizovaný uživatel rozpoznán.\\[-7.5mm]
+    \item Ztráta tokenu vede většinou ke kompromitaci celého systému.\\[-7.5mm]
+    \item Ke kontrole je obvykle třeba speciální čtečka nebo vycvičená osoba.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara V dobrých autentizačních protokolech se typicky}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Heslo posílá v hašované podobě\\[-7.5mm]
+    \item Heslo neposílá vůbec\\[-7.5mm]
+    \item Heslo posílá v otevřené podobě\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, b\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Proces použití biometrik pro autentizaci zahrnuje}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item registraci\\[-7.5mm]
+    \item verifikaci\\[-7.5mm]
+    \item degustaci\\[-7.5mm]
+    \item demonstraci\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, b\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Decentralizovaná správa řízení přístupu k objektu znamená}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item klíč (totožný) od budovy má víc lidí\\[-7.5mm]
+    \item přístupová práva nastavují příslušní vlastníci jednotlivých objektů\\[-7.5mm]
+    \item obtížnou komunikaci mezi držiteli jednotlivých částí přístupového hesla či jiného tokenu\\[-7.5mm]
+    \item pro přístup k objektu je třeba shromáždit hesla či jiné tokeny rozdistribuované mezi více lidí\\[-7.5mm]
+    \item řízení přístupu provádí více autorizačních systémů zaráz\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Co je to semi-invazivní časová analýza?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Druh semi-invazivního útoku zneužívající u mnohých čipových karet možnost ovlivnění vstupního hodinového cyklu.\\[-7.5mm]
+    \item Speciální semi-invazivní útok na autentizační kalkulátor s hodinami.\\[-7.5mm]
+    \item Žádná z výše uvedených odpovědí.\\[-7.5mm]
+    \item Metrika sloužící k určení a vyhodnocení efektivnosti semi-invazivních útoků.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: c\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Útok na čipové karty pomocí indukce chyb je založen na:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Využití chybného běhu algoritmu po prudkém ovlivnění vnějších podmínek k získání tajných dat.\\[-7.5mm]
+    \item Využití indukce chyb po prudkém ovlivnění vnějších podmínek k testování změny chování algoritmu.\\[-7.5mm]
+    \item Jako první krok útoku je provedeno fyzického poškození.\\[-7.5mm]
+    \item Využití opravných kódů pro automatické odstranění chyby po prudkém ovlivnění vnějších podmínek.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, b\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Jaké jsou hlavní výhody biometrik}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item rychlé a (relativně) přesné výsledky.\\[-7.5mm]
+    \item nemůžeme je ztratit, zapomenout nebo předat jiné osobě.\\[-7.5mm]
+    \item jsou tajné.\\[-7.5mm]
+    \item jednoduchá správa vzorků.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, b\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Jaký mechanismus je použit pro zajištění bezpečnosti v autentizační hlavičce IPsec?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Message Authentication Code se sekvenčním číslem.\\[-7.5mm]
+    \item Diffie-Hellman autentizace bez klíčů.\\[-7.5mm]
+    \item Message Authentication Code s náhodným číslem.\\[-7.5mm]
+    \item Digitální podpis využívající RSA nebo DSA.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Co patří mezi bezpečnostní problémy používání bankovních karet s čipem?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Možnost odpozorování PINu na frekventovaných místech.\\[-7.5mm]
+    \item Špatná průkaznost nelegitimní autorizace platby pomocí PINu.\\[-7.5mm]
+    \item Velká obtížnost kopírování karty.\\[-7.5mm]
+    \item Výpočetní výkon nepostačuje pro kryptografické zabezpečení transakcí.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Na co není výhodné použít biometriky}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item na autentizaci dat.\\[-7.5mm]
+    \item na ochranu přístupu k tajnému klíči.\\[-7.5mm]
+    \item na doplňkovou formu autentizace.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Na jaké vrstvě funguje protokol SSL/TLS?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item mez aplikační a datovou vrstvou\\[-7.5mm]
+    \item na linkové vrstvě\\[-7.5mm]
+    \item na síťové vrstvě\\[-7.5mm]
+    \item na datové vrstvě\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Jaké vlastnosti má základní řízení přístupu (BAC) u elektronických pasů?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Tajný klíč lze získat z dat v MRZ\\[-7.5mm]
+    \item Umožňuje ustavení sdíleného symetrického klíče\\[-7.5mm]
+    \item Tajný klíč lze získat pouze z dat uložených v čipu\\[-7.5mm]
+    \item Umožňuje explicitní autorizace pro přístup k citlivým datům\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, b\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Úspěšné odposlechnutí citlivých dat ze sběrnice platebního terminálu může vést:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item K přečtení citlivých informací banky (sdílené tajné klíče uložené v terminálu)\\[-7.5mm]
+    \item K modifikaci nepodepsaného seznamu podporovaných verifikačních metod (CVM)\\[-7.5mm]
+    \item K získání přesné kopie dat na magnetickém proužku\\[-7.5mm]
+    \item K získání PINu\\[-7.5mm]
+    \item K narušení anonymity jednotlivých komunikujících stran\\[-7.5mm]
+    \item K modifikaci podepsaného seznamu podporovaných verifikačních metod (CVM)\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b, c, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Autentizace v soudobých systémech e-bankovnictví je výhradně}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Třífaktorová\\[-7.5mm]
+    \item Žádná z dalších odpovědí není správně\\[-7.5mm]
+    \item Dvoufaktorová\\[-7.5mm]
+    \item Jednofaktorová\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Forenzní řešení biometrik popisují tyto výroky}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item výsledek identifikace je získán obvykle za 1s či rychleji.\\[-7.5mm]
+    \item miniaturizace zařízení je jedním z hlavním cílů.\\[-7.5mm]
+    \item pro používání je nutná odborná znalost systému.\\[-7.5mm]
+    \item cena je vysoká, ale s tím se počítá.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: c, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Soubor /etc/passwd může obsahovat}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Datum a čas posledního úspěšného přihlášení do systému\\[-7.5mm]
+    \item Počet zbývajících neúspěšných pokusů o zadání hesla\\[-7.5mm]
+    \item Haše hesel uživatelů\\[-7.5mm]
+    \item Informaci o délce hesla\\[-7.5mm]
+    \item Informaci o tom, že haše hesel jsou v souboru /etc/shadow\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: c, e\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Pro autentizaci obrazovou informací platí}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Uživatel musí správně vybarvit předložený obrázek\\[-7.5mm]
+    \item Uživatel musí do systému nahrát správný obrázek\\[-7.5mm]
+    \item Uživatel musí systému slovně popsat obrázek sloužící k autentizaci\\[-7.5mm]
+    \item Uživatel musí vybrat správný obrázek nebo jeho část\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Na čem podle specifikace EMV závisí dohoda autentizační metody uživatele?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Rozhodnutí přísluší plně platebnímu terminálu\\[-7.5mm]
+    \item Na prioritně uspořádaném seznamu podporovaných verifikačních metod (CVM)\\[-7.5mm]
+    \item Na tom, zdali má být prováděna transakce on-line či offline\\[-7.5mm]
+    \item Na konkrétní implementaci statické, dynamické či kombinované autentizace dat\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Pro bezpečné používání digitálního podpisu}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Je nutné zajistit integritu privátního klíče\\[-7.5mm]
+    \item Je nutné zajistit integritu veřejného klíče\\[-7.5mm]
+    \item Je nutné udržet privátní klíč v tajnosti\\[-7.5mm]
+    \item Je nutné udržet veřejný klíč v tajnosti\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b, c\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara V současných českých elektronických pasech musí být uloženy soubory obsahující:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Kvalifikovaný certifikát držitele pasu (vydaný akreditovanou CA)\\[-7.5mm]
+    \item Haš soukromého klíče čipu, zajišťující integritu daného klíče\\[-7.5mm]
+    \item Digitálně podepsané haše všech tzv. DG souborů\\[-7.5mm]
+    \item Barevnou fotografii držitele pasu (formát JPEG/JPG2000) a otisky prstů (komprese WSQ)\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: c, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Co je vyžadováno pro autentizaci transakce při offline verifikaci se šifrováním PINu?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Originální PIN nutný pro verifikaci, který musí být bezpečně uložen v čipu\\[-7.5mm]
+    \item Fyzicky i prostředím dobře zabezpečený PINpad\\[-7.5mm]
+    \item Úspěšné proběhnutí automatické správy rizik\\[-7.5mm]
+    \item Nový RSA pár klíčů pro šifrování PINů\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, b, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Jaké jsou obecné výhody tokenů?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Rychlé zjištění ztráty.\\[-7.5mm]
+    \item Mohou zpracovávat a přenášet další informace.\\[-7.5mm]
+    \item Nikdy je nelze zneužít po náhodném nálezu.\\[-7.5mm]
+    \item Většinou nejsou jednoduše kopírovatelné.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, b, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Která z následujících tvrzení jsou platná pro protokol SSL/TLS?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Autentizace komunikujících stran je založena na symetrické kryptografii.\\[-7.5mm]
+    \item Po průběhu Handshake protokolu je komunikace šifrována symetrickým klíčem.\\[-7.5mm]
+    \item SSL/TLS protokol zajišťuje integritu a autenticitu dat.\\[-7.5mm]
+    \item Po úvodní Handshake protokolu je komunikace šifrována veřejným klíčem příjemce.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b, c\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Jaké jsou typické velikosti pamětí u současných čipových karet?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item < 100KB RAM, < 100KB ROM, > 1MB EEPROM\\[-7.5mm]
+    \item > 256KB RAM, ~100KB ROM, < 100KB EEPROM\\[-7.5mm]
+    \item ~128KB RAM, ~512KB ROM, ~512KB EEPROM\\[-7.5mm]
+    \item < 10KB RAM, ~100KB ROM, < 100KB EEPROM\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Z jakého důvodu se používá Server key namísto Host key pro vlastní autentizaci u SSH?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Zrychlení procesu autentizace klienta vůči serveru.\\[-7.5mm]
+    \item Pro zajištění kompatibility s protokolem telnet.\\[-7.5mm]
+    \item Ochrana dlouhodobého klíče Host key před kompromitováním.\\[-7.5mm]
+    \item Zrychlení procesu autentizace serveru vůči klientovi.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: c\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Které z protokolů se v současnosti v běžných aplikacích využívají více?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Challenge-response protokoly (protokoly výzva-odpověď)\\[-7.5mm]
+    \item Zero-knowledge protokoly (protokoly s nulovým rozšířením znalostí)\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Biometrická data při opakovaném měření kvalitním zařízením}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item jsou vždy shodná na 99 \% a víc.\\[-7.5mm]
+    \item nejsou nikdy shodná na 100 \%.\\[-7.5mm]
+    \item nejsou nikdy shodná na 100 \% až na otisky prstů.\\[-7.5mm]
+    \item jsou typicky shodná na 100 \%.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara IP spoofing označuje:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Podvržení IP adresy příjemce.\\[-7.5mm]
+    \item Zachycení IP adresy odesílatele i příjemce.\\[-7.5mm]
+    \item Zachycení IP odesílatele.\\[-7.5mm]
+    \item Podvržení IP adresy odesílatele.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Která z uvedených tvrzení o autentizačních kalkulátorech jsou pravdivá?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Přístup k využití kalkulátoru může být chráněn PINem.\\[-7.5mm]
+    \item Pracují na principu protokolu výzva/odpověď s využitím tajné informace.\\[-7.5mm]
+    \item Kalkulátor nelze zneužít i při znalosti PINu.\\[-7.5mm]
+    \item Výzva je zadávána manuálně nebo automaticky načtena z vhodného média.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, b, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Odolností vůči narušení se u čipových karet myslí:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Automatická akce provedená chráněnou částí při zjištění pokusu o narušení.\\[-7.5mm]
+    \item Vlastnost části systému umožňující detekovat fyzický útok.\\[-7.5mm]
+    \item Vlastnost části systému chráněné proti neautorizované modifikaci podstatně lépe než zbylá část systému.\\[-7.5mm]
+    \item Ochrana proti útoku rušením radiového signálu (RFID).\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: c\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Proč je u tokenů založených na hodinách potřeba řešit otázku posuvu hodin?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Pravým důvodem je přechod na letní/zimní čas a přestupné roky.\\[-7.5mm]
+    \item Žádná z výše uvedených odpovědí.\\[-7.5mm]
+    \item Nutnost synchronizace drobných odchylek mezi serverem a tokenem.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: c\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Matice přístupových práv}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item je reprezentace standardních přístupových práv v unixových OS (RWX-RWX-RWX)\\[-7.5mm]
+    \item zaznamenává pro každý objekt a každý subjekt údaje o čase, trvání, ... přístupu daného subjektu k danému objektu\\[-7.5mm]
+    \item má alespoň dva rozměry - subjekt a objekt\\[-7.5mm]
+    \item může mít i tři rozměry - subjekt, objekt a uživatel\\[-7.5mm]
+    \item definuje přinejmenším to, jaká přístupová práva mají jednotlivé subjekty k jednotlivým objektům\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: c, e\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Které z uvedených útoků na čipové karty nepatří mezi logické útoky?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Časová analýza\\[-7.5mm]
+    \item Útok přes aplikační rozhraní\\[-7.5mm]
+    \item Ozařování čipu\\[-7.5mm]
+    \item Preparace čipu\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: c, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Autentizace pomocí verifikace hlasu probíhá typicky}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item pomocí běžného mikrofonu.\\[-7.5mm]
+    \item pomocí soustavy mikrofonů rozmístěných ve vzdálenosti cca 0,5 m ve 4 směrech.\\[-7.5mm]
+    \item v samostatné odhlučněné komoře, pro odstranění okolního šumu.\\[-7.5mm]
+    \item využitím telefonu.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Které z uvedených typů autentizačních kalkulátorů se používají v IT bezpečnosti?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Kalkulátor s hodinami.\\[-7.5mm]
+    \item Kalkulátor s tajnou informací.\\[-7.5mm]
+    \item Kalkulátor bez vstupní klávesnice.\\[-7.5mm]
+    \item Kalkulátor s vestavěným budíkem (z angl. embedded alarm).\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, b, c\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Pro ss-vlastnost modelu Bell-LaPadula platí:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item je považována za nebezpečnou a není doporučováno ji používat\\[-7.5mm]
+    \item účelem je ochránit důvěrnost citlivých dat\\[-7.5mm]
+    \item procesy nesmějí zapisovat data do nižší úrovně\\[-7.5mm]
+    \item zachovává integritu dat\\[-7.5mm]
+    \item procesy nesmějí číst data na vyšší úrovni\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b, c, e\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Které z výroků o autentizaci na základě rozpoznání obličeje nejsou pravdivé?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Autentizaci komplikuje osvětlení a pozadí.\\[-7.5mm]
+    \item Přesnost se v posledních 5 letech příliš nezlepšila.\\[-7.5mm]
+    \item Jedná se o velice výpočetně náročnou metodu autentizace.\\[-7.5mm]
+    \item Autentizaci komplikuje změna účesu, náušnice a brýle.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara "Solení" hesel}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Pomůže vyřešit situaci, kdy mají uživatelé stejná hesla\\[-7.5mm]
+    \item Zajistí delší efektivní heslo\\[-7.5mm]
+    \item Je dodatečná technika při ukládání hesel pro určitou formu identifikace\\[-7.5mm]
+    \item Je dnes již jen velmi zřídka používaná technika\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, b\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Útok na čipové karty pomocí odběrové analýzy využívá:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Závislost průběhu odběru proudu na ukládaných datech do paměti EEPROM.\\[-7.5mm]
+    \item Data získaná odběrem vzorku paměti EEPROM.\\[-7.5mm]
+    \item Závislost průběhu odběru proudu na zpracovávaných datech.\\[-7.5mm]
+    \item Závislost průběhu odběru proudu na prováděné instrukci.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, c, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Co je to CVV2?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Druhý kontrolní součet uložený na magnetickém proužku (slouží k detekci dvoubitových a opravě jednobitových chyb)\\[-7.5mm]
+    \item Hodnota vytištěná na zadní straně karty (sloužící jako dodatečný zabezpečovací mechanizmus pro platby kartou přes Internet)\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Pokud ukládáme hesla šifrovaně}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Musíme věřit administrátorovi\\[-7.5mm]
+    \item Musíme znát (jako uživatelé) šifrovací klíč\\[-7.5mm]
+    \item Nesmí být použit šifrovací algoritmus DSA\\[-7.5mm]
+    \item Šifrovací klíč musí být přístupný autentizační službě\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Jak eliminujeme útoky hrubou silou na PINy?:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Pravidelnou změnou hodnoty PINu\\[-7.5mm]
+    \item Omezením počtu pokusů o zadání PINu\\[-7.5mm]
+    \item školením uživatelů\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Pro pojem výpočetní bezpečnost platí následující tvrzení.}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Výsledek náročného výstupu je podepsaný, z důvodu zaručení integrity\\[-7.5mm]
+    \item Časová náročnost prolomení určitého algoritmu mnohonásobně převyšuje dostupný výpočetní výkon\\[-7.5mm]
+    \item Algoritmus jako takový nemusí být považován za neprolomitelný, dosud pouze nebyl nalezen efektivní způsob řešení/výpočtu\\[-7.5mm]
+    \item Ani jedno z uvedených tvrzení neplatí\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b, c\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara K čemu slouží autentizační agent u ssh?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item K autentizaci dat přenášených mezi serverem a uživatelem.\\[-7.5mm]
+    \item Opakované požadavky vyžadující heslo řeší agent po prvním zadání automaticky.\\[-7.5mm]
+    \item Automaticky autentizuje server vůči uživateli bez nutnosti zadávat opakovaně heslo.\\[-7.5mm]
+    \item Autentizační agent se u ssh nepoužívá, neboť je použita asymetrická kryptografie.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Mezi metody volitelného řízení přístupu patří:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Hašování dat.\\[-7.5mm]
+    \item Přihlašování doplňkovou biometrikou.\\[-7.5mm]
+    \item Seznamy přístupových práv.\\[-7.5mm]
+    \item Bell-LaPadula.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: c\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara K čemu slouží MAC (Message authentication code)}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item K zajištění důvěrnosti\\[-7.5mm]
+    \item K zajištění integrity\\[-7.5mm]
+    \item K ověření zprávy síťové karty\\[-7.5mm]
+    \item K detekci chyb při přenosu dat\\[-7.5mm]
+    \item K transformaci hašovací funkce\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, b, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Při kombinaci šifrování veřejným klíčem a podpisu dokumentu se doporučuje operace provést v následujícím pořadí:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Podpis, šifrování, podpis\\[-7.5mm]
+    \item Šifrování, podpis, šifrování\\[-7.5mm]
+    \item Šifrování, podpis\\[-7.5mm]
+    \item Na pořadí operací nezáleží\\[-7.5mm]
+    \item Podpis, šifrování\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: e\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Základní bezpečnostní problémy RFID jsou:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Interference\\[-7.5mm]
+    \item Idempotence\\[-7.5mm]
+    \item Nepolapitelnost\\[-7.5mm]
+    \item Autentizace\\[-7.5mm]
+    \item Soukromí\\[-7.5mm]
+    \item Nepopiratelnost\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, d, e\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara U dynamiky podpisu je důležitý}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item aretačně-dynamický tablet.\\[-7.5mm]
+    \item čas potřebný pro provedení podpisu.\\[-7.5mm]
+    \item pořadí jednotlivých tahů pera.\\[-7.5mm]
+    \item výsledný podpis.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b, c\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Zero-knowledge protokoly (protokoly s nulovým rozšířením znalostí) umožňují, poctivým stranám vždy dosáhnout úspěšného výsledku. Tato vlastnost se nazývá:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Částečné uspokojení (partial satisfaction)\\[-7.5mm]
+    \item Úplnost (completeness)\\[-7.5mm]
+    \item Korektnost (soundness)\\[-7.5mm]
+    \item Úplné uspokojení (complete satisfaction)\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Základní fakta o biometrických systémech jsou:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item kopírování biometrik nemusí být triviální, ale není obtížné.\\[-7.5mm]
+    \item biometrická data mohou být velmi citlivé informace.\\[-7.5mm]
+    \item biometrická data jsou tajná.\\[-7.5mm]
+
+\end{enumerate}
+\textit{\textbf{Správně}}: a, b\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Které z uvedených možností nezajišťuje protokol IPsec?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Ochranu proti analýze šifrovaného provozu na síťové vrstvě.\\[-7.5mm]
+    \item Integrita a autentizace původu dat.\\[-7.5mm]
+    \item Nepopiratelnost přijetí dat.\\[-7.5mm]
+    \item Důvěrnost dat, ochrana proti přehrání.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, c\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara U autentizace pomocí hesel}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Musíme řešit aspekt zapamatovatelnosti vs. bezpečnosti\\[-7.5mm]
+    \item Musíme řešit aspekt bezpečnosti bez ohledu na zapamatovatelnost\\[-7.5mm]
+    \item Musí uživatel prokázat, že si dokáže zapamatovat alespoň 10 náhodně zvolených symbolů\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Jaké bezpečnostní problémy lze identifikovat v soudobém bankovnictví?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Použití pouze asymetrické kryptografie v kombinaci s hašovacími funkcemi (pouze pro podpisy)\\[-7.5mm]
+    \item Dodatečné autorizační SMS zprávy jen u některých operací e-bankovnictví\\[-7.5mm]
+    \item Nedostatečné zabezpečení platebních terminálů\\[-7.5mm]
+    \item Použití autentizačních kalkulátorů\\[-7.5mm]
+    \item Social engineering např. při telefonním hovoru\\[-7.5mm]
+    \item Zasílání embosované karty poštou a nedostatečně zabezpečené doručování PINu a hesla\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b, c, e, f\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Pravděpodobnost, že se nepoctivý útočník může úspěšně vydávat za jinou stranu je u zero-knowledge protokolů (protokoly s nulovým rozšířením znalostí) mizivá. Tato vlastnost se nazývá:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Částečné uspokojení (partial satisfaction)\\[-7.5mm]
+    \item Korektnost (soundness)\\[-7.5mm]
+    \item Úplné uspokojení (complete satisfaction)\\[-7.5mm]
+    \item Úplnost (completeness)\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Které biometrické charakteristiky bývají nazývány také statickými?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item fenotypické\\[-7.5mm]
+    \item behaviorální\\[-7.5mm]
+    \item fyziologické\\[-7.5mm]
+    \item genotypické\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: c\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Která z uvedených tvrzení o tokenech založených na hodinách jsou pravdivá:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Token s hodinami nelze použít bez přítomnosti klávesnice.\\[-7.5mm]
+    \item Autentizační hodnota je vygenerována na základě aktuálního času a tajné informace.\\[-7.5mm]
+    \item Přístup k využití tokenu s hodinami musí být vždy chráněn PINem.\\[-7.5mm]
+    \item Je potřeba řešit otázku synchronizace hodin mezi serverem a tokenem.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Mezi obecné výhody tokenů nepatří:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Obtížná kopírovatelnost.\\[-7.5mm]
+    \item Snadné zjištění ztráty.\\[-7.5mm]
+    \item Snadná detekce a odpověď na narušení.\\[-7.5mm]
+    \item Možnost zpracovávání informací.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: c\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Pro vztah řízení přístupu a autentizace platí:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item jedná se o dva naprosto nesouvisející pojmy\\[-7.5mm]
+    \item jde o ekvivalentní termíny\\[-7.5mm]
+    \item řízení přístupu je obvyklou podmínkou pro autentizaci\\[-7.5mm]
+    \item autentizace je obvyklou podmínkou pro řízení přístupu\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Které z níže uvedených typů protokolů existují?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Autentizační protokoly bez ustavení klíče\\[-7.5mm]
+    \item Zero-knowledge protokoly (protokoly s nulovým rozšířením znalostí) pro ustavení klíče.\\[-7.5mm]
+    \item Autentizované protokoly pro ustavení klíče\\[-7.5mm]
+    \item Protokoly pro ustavení klíče\\[-7.5mm]
+    \item Neautentizované protokoly pro ustavení klíče\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, c, d, e\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Čím je dáno, že komunikace s RFID tagem musí probíhat pouze na přímou viditelnost? }\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Použitými kryptografickými mechanizmy\\[-7.5mm]
+    \item Použitou vlnovou délkou\\[-7.5mm]
+    \item Použitým frekvenčním pásmem\\[-7.5mm]
+    \item Množstvím přenášených dat\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b, c\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Které z příkladů autentizace počítačů jsou možné:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Privátním klíčem asymetrické kryptografie.\\[-7.5mm]
+    \item Kombinace IP, MAC, GUID (global unique identifier).\\[-7.5mm]
+    \item Kombinace IP adresy a tajného klíče symetrické kryptografie.\\[-7.5mm]
+    \item Tajným klíčem symetrické kryptografie.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Která z následujících tvrzení jsou platná pro protokol SSL/TLS?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item SSL/TLS protokol nezajišťuje důvěrnost dat.\\[-7.5mm]
+    \item Implicitně je autentizace serveru a klienta je povinná.\\[-7.5mm]
+    \item Autentizace komunikujících stran je založena na asymetrické kryptografii.\\[-7.5mm]
+    \item SSL/TLS protokol umožňuje vzájemnou autentizaci serveru a klienta.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: c, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Mezi nejslibnější technologie v oblasti identifikace v počítačových systémech pomocí biometrik nepatří}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item otisk prstu.\\[-7.5mm]
+    \item tvar ruky.\\[-7.5mm]
+    \item ověření mluvčího.\\[-7.5mm]
+    \item snímání oční duhovky.\\[-7.5mm]
+    \item DNA.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b, e\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Která z tvrzení jsou platná pro termín "separace oprávnění" při řízení přístupu}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item týká se rozlišení procesů autentizace a autorizace\\[-7.5mm]
+    \item žádní dva uživatelé systému nesmějí mít nikdy stejná oprávnění\\[-7.5mm]
+    \item označuje stav, kdy je k provedení operace nutný souhlas více osob\\[-7.5mm]
+    \item tento termín neexistuje\\[-7.5mm]
+    \item vyjadřuje skutečnost, že se jednotlivé úrovně oprávnění nesmí překrývat\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: c\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Která z následujících tvrzení platí pro princip nejmenších privilegií:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item žádný uživatel nemá přístup k objektům, které nepotřebuje\\[-7.5mm]
+    \item k objektu nemají přístup uživatelé, kteří jej nezbytně nepotřebují\\[-7.5mm]
+    \item uživatelé systému mají na počátku nejvyšší možná oprávnění\\[-7.5mm]
+    \item označuje stav, kdy je k provedení operace nutný souhlas více osob\\[-7.5mm]
+    \item přístup k souboru má pouze uživatel s menšími privilegii než administrátor\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, b\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Pokud při kontrole japonského pasu na českých hranicích není k dispozici CSCA certifikát Japonska:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item nic se neděje protože není vůbec potřeba\\[-7.5mm]
+    \item lze alternativně použít CSCA certifikát České republiky\\[-7.5mm]
+    \item lze ověřit platnost dat v pasu, jen pokud haše DG souborů odpovídají obsahu DG souborů\\[-7.5mm]
+    \item nelze ověřit platnost dat v čipu pasu\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Markanta v oblasti biometrik znamená:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Významný bod v otisku prstu.\\[-7.5mm]
+    \item Výrazné poškození dané biometriky u konkrétního uživatele.\\[-7.5mm]
+    \item Zpracovaný obraz oční duhovky se zvýrazněnými přechody.\\[-7.5mm]
+    \item Biometrická technologie s významně vysokou hodnotou EER.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Zajistit autentizaci digitálních dat a zpráv lze ???}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Pomocí klasického (ručního) podpisu\\[-7.5mm]
+    \item Pomocí zaručeného elektronického podpisu\\[-7.5mm]
+    \item Pomocí MAC\\[-7.5mm]
+    \item Pomocí klíčované hašovací funkce\\[-7.5mm]
+    \item Pomocí parciálně zaručeného elektronického podpisu\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b, c, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Které z uvedených typů karet se používají v IT bezpečnosti?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Kontaktní karty s čipem.\\[-7.5mm]
+    \item Karty s bezkontaktním magnetickým proužkem.\\[-7.5mm]
+    \item Bezkontaktní karty s čipem.\\[-7.5mm]
+    \item SIM karty v mobilních telefonech.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, c, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Proti jakým útokům brání protokol ssh?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Odposlech hesla a pozdější přehrání (na uživatelově PC)\\[-7.5mm]
+    \item Analýza šifrovaného provozu na síťové vrstvě\\[-7.5mm]
+    \item Odposlech hesla a pozdější přehrání (na síťové vrstvě)\\[-7.5mm]
+    \item DNS/IP/Routing spoofing\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: c, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Která z tvrzení o mechanismu SUID platí:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item přiděluje se konkrétním uživatelům při vytváření účtů\\[-7.5mm]
+    \item umožňuje kontrolovatelné spouštění zavirovaných programů bez ID\\[-7.5mm]
+    \item může přidělovat administrátorská práva konkrétním procesům\\[-7.5mm]
+    \item propůjčuje skupinu vlastníka souboru tomu, kdo jej spouští\\[-7.5mm]
+    \item propůjčuje identitu vlastníka souboru tomu, kdo jej spouští\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: c, e\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Zjistitelností narušení se u čipových karet myslí:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Po narušení jsou stopy narušení obtížně odstranitelné.\\[-7.5mm]
+    \item Při zjištění narušení je automaticky provedena chráněnou částí obranná akce.\\[-7.5mm]
+    \item Odolnost proti pokusům o zjištění robustnosti vůči fyzickým útokům.\\[-7.5mm]
+    \item Vlastnost části systému umožňující reagovat na fyzický útok.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Které z uvedených režimů podporuje IPsec:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Překladový režim.\\[-7.5mm]
+    \item Transportní režim.\\[-7.5mm]
+    \item Tunelovací režim.\\[-7.5mm]
+    \item Dynamický virtuální režim.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b, c\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Jaké jsou nevýhody autentizace hašovaným heslem?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Příliš snadná transformace na zero-knowledge protokoly (protokoly s nulovým rozšířením    znalostí)\\[-7.5mm]
+    \item Útok přehráním\\[-7.5mm]
+    \item Možnost impersonace\\[-7.5mm]
+    \item Náchylnost ke slovníkovému útoku\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b, c\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara PIN je}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Osobně sdílená informace\\[-7.5mm]
+    \item Kombinace čísel a písmen (A-F) pro potřeby autentizace\\[-7.5mm]
+    \item Veřejně známá informace\\[-7.5mm]
+    \item Kombinace čísel pro potřeby autentizace\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara K čemu slouží CRC (Cyclic redundancy check)}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item K ověření autenticity dat\\[-7.5mm]
+    \item Ke kompresi dat\\[-7.5mm]
+    \item K zašifrování dat\\[-7.5mm]
+    \item K detekci chyb při přenosu dat\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Co zajišťujeme použitím náhodných čísel?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Odolnost proti uváznutí a stárnutí\\[-7.5mm]
+    \item Aktuálnost\\[-7.5mm]
+    \item Nezvratnost\\[-7.5mm]
+    \item Stálost a stabilitu\\[-7.5mm]
+    \item Čerstvost\\[-7.5mm]
+    \item Jedinečnost\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b, e, f\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Čeho lze dosáhnout zopakováním zero-knowledge protokolu (protokol s nulovým rozšíření znalostí)?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Zvýšení bezpečnosti - zvýší se záruka, že nedojde k rozšíření žádných znalostí\\[-7.5mm]
+    \item Zvýšení bezpečnosti - sníží se pravděpodobnost, že nepoctivý útočník se může úspěšně vydávat za jinou stranu\\[-7.5mm]
+    \item Ničeho - ke spolehlivé autentizaci stačí 1 kolo protokolu\\[-7.5mm]
+    \item Ničeho - nezvýší se záruka, že nedojde k rozšíření žádných znalostí\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Co je klonování elektronického pasu:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Jedná se o neautorisované čtení pasu bez znalosti dat z MRZ\\[-7.5mm]
+    \item Jedná se o neautorizovanou změnu dat v čipu, která je detekovatelná díky ověření digitálního podpisu.\\[-7.5mm]
+    \item Jedná se o opakované využití náhodného identifikátoru čipu využívaného pro nízkoúrovňovou komunikaci pomocí ISO 14443\\[-7.5mm]
+    \item Jedná se o kopii souborů z jednoho pasu do jiného\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Která z následujících tvrzení snímání geometrie ruky jsou pravdivá?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Snímače snímají 2D snímky ruky shora, zespodu a ze stran (dohromady 4 snímky, u špičkových zařízení i 5-6).\\[-7.5mm]
+    \item Snímače snímají 2D snímky ruky mikrokamerami ve fixačních kolících.\\[-7.5mm]
+    \item Snímače snímají zjednodušený 3D náhled ruky.\\[-7.5mm]
+    \item Tvar ruky je jedinečný (ve skupinách o tisících uživatelů).\\[-7.5mm]
+    \item Tvar ruky není jedinečný (ve skupinách o tisících uživatelů).\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: c, e\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Který z následujících protokolů je součásti SSL/TLS protokolu?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Kerberos protokol.\\[-7.5mm]
+    \item Record Layer protokol.\\[-7.5mm]
+    \item IPSec protokol.\\[-7.5mm]
+    \item Handshake protokol.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara O RBAC (Role Based Access Control) je možné říci, že:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item jednotlivým uživatelům jsou přiřazovány odpovídající role\\[-7.5mm]
+    \item jedná se o nadstavbu BAC použitého u elektronických pasů\\[-7.5mm]
+    \item jde o zastaralý koncept ochrany soukromí\\[-7.5mm]
+    \item místo rolí se v moderních operačních systémech používá stránkování\\[-7.5mm]
+    \item nejde ani o volitelné, ani povinné řízení přístupu\\[-7.5mm]
+    \item existuje standardizovaná metodika řazení uživatelů do jednotlivých rolí\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, e\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Integrita dat znamená}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Data v původní podobě lze obnovit i přesto, že byla modifikována\\[-7.5mm]
+    \item Data nebyla neautorizovaně změněna pouze v průběhu přenosu nezabezpečeným kanálem\\[-7.5mm]
+    \item Data nebyla neautorizovaně změněna\\[-7.5mm]
+    \item Data nebyla autorizovaně předána\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: c\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Digitálně podepisujeme}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Pouze haš podepisovaného dokumentu\\[-7.5mm]
+    \item V případě malých dokumentů celou zprávu, v případě velkých dokumentů jejich haš\\[-7.5mm]
+    \item Vždy přímo celý dokument\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Při používání digitálního podpisu používáme}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Digitální klíč\\[-7.5mm]
+    \item Privátní a veřejný klíč\\[-7.5mm]
+    \item Sdílené symetrické klíče mezi všemi komunikujícími partnery\\[-7.5mm]
+    \item Digitální pečetě\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Jaký je vztah mezi chybovou analýzou a útoky na a přes API?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Chybová analýza s útoky na a přes API nijak nesouvisí.\\[-7.5mm]
+    \item API mnohdy obsahuje četné chyby hodné důkladné analýzy.\\[-7.5mm]
+    \item Chybová analýza je nezbytná součást každého útoku na a přes API.\\[-7.5mm]
+    \item Každý útok na a přes API je nezbytnou součástí chybové analýzy.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Český elektronický pas s aktivní autentizací:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Lze naklonovat snadno, pokud známe data z MRZ\\[-7.5mm]
+    \item Nelze snadno naklonovat (vyžaduje získání soukromého klíče pasu, který nelze z pasu vyčíst) a proto klonovaní českého pasu zatím nebylo veřejně předvedeno.\\[-7.5mm]
+    \item Lze naklonovat jen pokud spolupracuje skutečný držitel pasu a zná svůj PIN\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Jak zajistíme integritu veřejného klíče}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Utajením soukromé části veřejného klíče\\[-7.5mm]
+    \item Pomocí klíčované hašovací funkce\\[-7.5mm]
+    \item Částečným utajením veřejného klíče\\[-7.5mm]
+    \item Pomocí párového privátního klíče\\[-7.5mm]
+    \item Pomocí certifikátu veřejného klíče\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: e\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Úspěšnost útoku hrubou silou se dá odhadnout podle vzorce}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item (velikost abecedy * délka hesla)/(počet odhadů za jednotku času)\^(čas platnosti)\\[-7.5mm]
+    \item (čas platnosti * počet odhadů za jednotku času)/(velikost abecedy)\^(délka hesla)\\[-7.5mm]
+    \item (délka hesla * počet odhadů za jednotku času)/(velikost abecedy)\^(čas platnosti)\\[-7.5mm]
+    \item (počet odhadů za jednotku času * délka hesla)/(čas platnosti)\^(velikost abecedy)\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Proč musíme povolit určitou variabilitu mezi registračním vzorkem a později získanými biometrickými daty?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Z důvodu možné transplantace orgánu, aby i po ní bylo snímání možné.\\[-7.5mm]
+    \item Protože buňky mají přirozenou tendenci obnovovat se a tudíž mohou vznikat malé odlišnosti.\\[-7.5mm]
+    \item Protože biometrická data nejsou nikdy 100 \% shodná.\\[-7.5mm]
+    \item Pokud je registrační vzorek nasnímám opravdu kvalitně, tak variabilita nemusí být povolena.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: c\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara K čemu se používá CAPTCHA}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item K odlišení uživatelů od robotů\\[-7.5mm]
+    \item K odlišení chytrých robotů od robotů první generace\\[-7.5mm]
+    \item K testu uživatelů, zda chtějí luštit text v obrázku a opisovat jej\\[-7.5mm]
+    \item Je to dynamicky se měnící designový prvek www stránek\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Německý elektronický pas první generace bez aktivní autentizace:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Nelze snadno naklonovat (vyžaduje získání soukromého klíče pasu, který nelze z pasu vyčíst).\\[-7.5mm]
+    \item Lze naklonovat jen pokud spolupracuje skutečný držitel pasu a zná svůj PIN\\[-7.5mm]
+    \item Lze naklonovat snadno, pokud známe data z MRZ\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: c\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Které z uvedených možností jsou proveditelnými útoky při provedení autentizace prostřednictvím .rhosts}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Vrácení podvržené IP adresy po dotazu na DNS server.\\[-7.5mm]
+    \item Útok hrubou silou.\\[-7.5mm]
+    \item Uvedení nepředpokládaného loginu uživatele.\\[-7.5mm]
+    \item IP spoofing.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, c, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Pro dynamickou autentizaci dat (DDA) platí, že:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Řeší problém padělání/duplikace karet\\[-7.5mm]
+    \item Potvrzuje pravost pouze statických dat uložených v čipové kartě.\\[-7.5mm]
+    \item Je prováděna platebním terminálem i čipem\\[-7.5mm]
+    \item Potvrzuje pravost statických uložených v čipové kartě, ale i dynamických dat zaslaných čipem\\[-7.5mm]
+    \item Je prováděna pouze čipovou kartou (terminál pouze zasílá data)\\[-7.5mm]
+    \item Potvrzuje pravost statických dat uložených v čipové kartě, ale i dynamických dat zaslaných terminálem\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, c, f\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Zaručený elektronický podpis}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Autorizuje podepisující osobu ve vztahu k datové zprávě\\[-7.5mm]
+    \item Umožňuje identifikaci podepisující osoby ve vztahu k datové zprávě\\[-7.5mm]
+    \item Je spojen s dostatečnou finanční zárukou\\[-7.5mm]
+    \item Umožňuje detekci změn ve zprávě, ke které je připojen\\[-7.5mm]
+    \item Je jednoznačně spojen s podepisující osobou\\[-7.5mm]
+    \item Je jednoznačně ověřitelný\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b, d, e, f\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Které z následujících nejsou hašovací funkce}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item RSA\\[-7.5mm]
+    \item MD5\\[-7.5mm]
+    \item SHA-1\\[-7.5mm]
+    \item AES\\[-7.5mm]
+    \item MD4\\[-7.5mm]
+    \item RC4\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, d, f\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Které protokoly zaručují určitou míru jistoty o identitě jiné strany?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Protokoly pro ustavení klíče\\[-7.5mm]
+    \item Autentizační protokoly\\[-7.5mm]
+    \item Zero-knowledge protokoly (protokoly s nulovým rozšířením znalostí)\\[-7.5mm]
+    \item Protokoly implementované v Kerberu\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b, c, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Volitelné řízení přístupu}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item v určitých případech nezabrání neoprávněnému zveřejnění důvěrných dat\\[-7.5mm]
+    \item zavádí striktní hierarchii členění důvěryhodnosti dat\\[-7.5mm]
+    \item zavádí striktní hierarchii členění bezpečnosti dat\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Které časově konstantní parametry se používají v kryptografických protokolech?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Žádné z uvedených\\[-7.5mm]
+    \item V omezeném čase monoliticky rostoucí sekvence (zabraňují tzv. borcení časové osy)\\[-7.5mm]
+    \item XOR hodnotou "-1" pro modifikaci náhodné výzvy (tzv. keksík)\\[-7.5mm]
+    \item Komplexní čísla s fixní imaginární i reálnou složkou\\[-7.5mm]
+    \item Sekvenční číslo (jeho hodnota závisí na implementaci)\\[-7.5mm]
+    \item Náhodná časová razítka (platná po určitou dobu - typicky několik desítek hodin)\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Co patří mezi bezpečnostní problémy používání bankovních karet pouze s     magnetickým proužkem?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Autentizační podpis je součástí karty.\\[-7.5mm]
+    \item Malá odolnost proti chybové analýze.\\[-7.5mm]
+    \item Relativně jednoduše se kopírují.\\[-7.5mm]
+    \item Přítomný hologram se obtížně automatizovaně kontroluje.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: c, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Mezi nevýhody ACL (seznam přístupových práv) patří:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item je pomocí nich obtížné zjistit všechny subjekty, ke kterým má daný objekt přístup\\[-7.5mm]
+    \item je pomocí nich obtížné zjistit všechny objekty, ke kterým má daný uživatel přístup\\[-7.5mm]
+    \item je pomocí nich obtížné zjistit všechny subjekty, které mají k danému uživateli přístup\\[-7.5mm]
+    \item malá režie a tvrdá vyjadřovací schopnost\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Které z uvedených možností autentizace klienta vůči serveru podporuje protokol ssh?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item RSA autentizaci klienta.\\[-7.5mm]
+    \item Využitím protokolu pro nulové rozšíření znalosti.\\[-7.5mm]
+    \item Stroje uvedené v souborech .rhosts nebo hosts.equiv.\\[-7.5mm]
+    \item Heslem uživatele bez autentizace serveru.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, c\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Která z uvedených tvrzení pro Encapsulated Security Payload (ESP) nejsou pravdivá?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item ESP nemá zajištěnu integritu a autenticitu dat, zajišťuje pouze důvěrnost dat.\\[-7.5mm]
+    \item ESP zajišťuje integritu, autenticitu a důvěrnost dat.\\[-7.5mm]
+    \item ESP zajišťuje obranu proti analýze šifrovaného provozu na úrovni síťové vrstvy.\\[-7.5mm]
+    \item ESP zajišťuje integritu, autenticitu a důvěrnost dat, nezajišťuje však obranu proti útoku přehráním.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, c, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Co znamená pojem elektronický podpis ve smyslu zákona o elektronickém podpisu?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Takový pojem zákon neobsahuje\\[-7.5mm]
+    \item To stejné, co digitální podpis\\[-7.5mm]
+    \item Ručně psaný podpis\\[-7.5mm]
+    \item Libovolná identifikující informace připojená ke zprávě\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Jaká jsou platná tvrzení pro aktivní autentizaci elektronických pasů?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Pro autentizaci je použit zero-knowledge protokol (Fiat-Shamir), který zároveň ověří, zda má pas k dispozici soukromý klíč\\[-7.5mm]
+    \item Soukromý klíč je uložen v čipu, bez možnosti jeho přímého získání\\[-7.5mm]
+    \item Veřejný klíč je uložen ve čtečce el. pasů a je digitálně podepsán\\[-7.5mm]
+    \item Protokol výzva-odpověď lze použít pouze pokud čip neumožňuje efektivní implementaci zero-knowledge protokolu\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Jaká je nevýhoda digitálního podepisování prováděného až po zašifrování dat}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Žádná, naopak výhodou je možnost snadné verifikace podpisu ještě před dešifrováním\\[-7.5mm]
+    \item Výrazné urychlení kryptoanalýzy\\[-7.5mm]
+    \item Možnost snadného odstranění digitálního podpisu\\[-7.5mm]
+    \item Žádná, naopak, výhodou je možnost několikanásobného podepsání zašifrovaných dat\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: c\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Silná bezkoliznost u hašovacích funkcí znamená}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item V rozumném čase nejsme schopni nalézt x, y (x=y) tak, že h(x)!=h(y)\\[-7.5mm]
+    \item V rozumném čase nejsme schopni nalézt x, y (x=y) tak, že h(x)=h(y)\\[-7.5mm]
+    \item V rozumném čase nejsme schopni nalézt x, y (x!=y) tak, že h(x)=h(y)\\[-7.5mm]
+    \item V rozumném čase nejsme schopni nalézt x, y (x!=y) tak, že h(x)!=h(y)\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: c\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Jaká technologie PINmailerů je bezpečnější při útocích prosvícením?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Laserový tisk\\[-7.5mm]
+    \item Průklepový tisk\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara K prvkům hardwarové podpory řízení přístupu patří např.}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item tzv. zero address: pokud se proces pokusí přistupovat k nulové adrese, což bývá známkou chyby, je násilně zastaven\\[-7.5mm]
+    \item tzv. poštovní adresování: paměť je rozdělena na oblasti, aby OS mohl chránit paměť kontrolou znalosti tajného PSČ (tzv. ZIP code)\\[-7.5mm]
+    \item zákaz přístupu všem procesům kromě OS do adres paměti nižších než jistá hranice (tzv. fence address)\\[-7.5mm]
+    \item randomizace adres haldy (heap), na kterých se alokují dynamické proměnné běžících programů\\[-7.5mm]
+    \item existence několika úrovní oprávnění (tzv. rings) definujících přístupnost různých registrů a strojových instrukcí programovému kódu\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: c, e\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Které z uvedených odpovědí jsou pravdivé?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Cena výroby jednoho kusu tokenu klesá při výrobě mnohakusové série.\\[-7.5mm]
+    \item Cena padělání typicky nezávisí na počtu padělaných kusů.\\[-7.5mm]
+    \item Cena padělání jednoho kusu klesá při uplatnitelnosti mnohakusové série padělku.\\[-7.5mm]
+    \item Relativní cena padělání se zvyšuje s každým dalším padělkem.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Jaké jsou používané algoritmy při digitálním podepisování}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item CBC\\[-7.5mm]
+    \item AES\\[-7.5mm]
+    \item DSA\\[-7.5mm]
+    \item RSA\\[-7.5mm]
+    \item El-Gamal\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: c, d, e\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Při hašování hesel pro autentizaci uživatelů pomocí hesel:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Ukládáme pouze haš hesla a rekonstrukce otevřené podoby není možná\\[-7.5mm]
+    \item Ukládáme pouze haš hesla s možností rekonstrukce hesla v otevřené podobě\\[-7.5mm]
+    \item Při ukládání můžeme využít techniky "solení"\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, c\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Mezi skryté kanály (covert channels) patří:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item čítač vadných sektorů (Bad Blocks Counter, BBC)\\[-7.5mm]
+    \item zaplnění disku\\[-7.5mm]
+    \item kanál částečně autorizovaného přenosu dat sběrnice MAC\\[-7.5mm]
+    \item aktuální zátěž procesoru\\[-7.5mm]
+    \item aktuální uzel v síti (Current Network Node, CNN)\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Chybovost biometrických systémů závisí na:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Schopnosti a motivaci uživatelů.\\[-7.5mm]
+    \item Nastavení systému.\\[-7.5mm]
+    \item Typu snímače.\\[-7.5mm]
+    \item Okolním prostředí.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, b, c, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Útok na hesla může být}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Slovníkový\\[-7.5mm]
+    \item Pomocí sociálního inženýrství\\[-7.5mm]
+    \item Matrixovou metodou\\[-7.5mm]
+    \item Hrubou silou\\[-7.5mm]
+    \item Na základě určitých znalostí o uživateli\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, b, d, e\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Protokoly výzva-odpověď mohou být založeny na:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item klíčované hašovací funkci\\[-7.5mm]
+    \item symetrickém šifrování\\[-7.5mm]
+    \item digitálním podpisu\\[-7.5mm]
+    \item MAC kódu, resp. funkci\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, b, c, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Základní techniky zajištění soukromí u RFID tagů jsou:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Selektivní blokování tagů\\[-7.5mm]
+    \item Deaktivace či rušení RFID tagu\\[-7.5mm]
+    \item Kryptografické metody pro zajištění soukromí pomocí soukromých klíčů asymetrické kryptografie (s potenciální možností využití hybridního šifrování)\\[-7.5mm]
+    \item Využití protokolů zajišťujících anonymitu jednotlivých stran\\[-7.5mm]
+    \item Důsledné utajení existence RFID tagu\\[-7.5mm]
+    \item Změna jedinečného identifikátoru\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, b, f\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Vhodná tajná informace pro autentizaci je}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Rodné příjmení matky\\[-7.5mm]
+    \item Tel. číslo, pokud není uvedeno ve Zlatých stránkách\\[-7.5mm]
+    \item Heslo\\[-7.5mm]
+    \item PIN\\[-7.5mm]
+    \item Fráze (passphrase)\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: c, d, e\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Mezi reálně používané biometrické technologie patří}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item dynamika pohybu hlavy\\[-7.5mm]
+    \item otisk prstu\\[-7.5mm]
+    \item srovnání obličeje\\[-7.5mm]
+    \item geometrie (tvaru) nohy\\[-7.5mm]
+    \item vzor oční panenky\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b, c\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Mezi problémy při správě víceúrovňových systémů (MLS) typicky patří:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item nestabilita aplikací využívajících MLS\\[-7.5mm]
+    \item nevhodné chování procesů\\[-7.5mm]
+    \item náročná administrace\\[-7.5mm]
+    \item neexistující nástroje pro administraci\\[-7.5mm]
+    \item propojování jednotlivých MLS systémů\\[-7.5mm]
+    \item obtížná/nejednoznačná klasifikace dat\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: c, e, f\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Co nezajišťuje protokol ssh?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Autentizaci uživatele.\\[-7.5mm]
+    \item Ochranu proti analýze provozu.\\[-7.5mm]
+    \item Ochranu proti distribuovanému odmítnutí služby.\\[-7.5mm]
+    \item Autentizaci serveru.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b, c\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Přístupová hesla můžeme rozlišit na}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Jednorázová\\[-7.5mm]
+    \item Veřejná\\[-7.5mm]
+    \item Původně neveřejná\\[-7.5mm]
+    \item Skupinová\\[-7.5mm]
+    \item Unikátní pro danou osobu\\[-7.5mm]
+    \item Jednocestná\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, d, e\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Dynamická autentizace dat (DDA) se liší oproti statické autentizaci dat (SDA) tím, že:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item vyžaduje čip s dostatečnou paměťovou kapacitou, ale nevyžaduje koprocesor\\[-7.5mm]
+    \item vyžaduje nový unikátní pár RSA klíčů\\[-7.5mm]
+    \item vyžaduje nový unikátní pár AES klíčů\\[-7.5mm]
+    \item vyžaduje, aby byl veřejný klíč podepsán a uložen společně se statickými aplikačními daty\\[-7.5mm]
+    \item vyžaduje bezpečně uložený certifikát umožňující kartě ověřit pravost platebního terminálu\\[-7.5mm]
+    \item vyžaduje čip s kryptografickým koprocesorem\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b, d, f\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Současné čipové karty:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Umožňují pouze provádění kryptografických operací asymetrické kryptografie.\\[-7.5mm]
+    \item Neumožňují provádění kryptografických operací.\\[-7.5mm]
+    \item Umožňují provádění kryptografických operací symetrické a asymetrické kryptografie s využitím koprocesoru.\\[-7.5mm]
+    \item Umožňují pouze provádění kryptografických operací symetrické kryptografie.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: c\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Fyzickou bezpečností se u čipových karet myslí:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Ochrana proti hloubkové odběrové analýze na úrovni procesoru.\\[-7.5mm]
+    \item Ochrana proti fyzickému zkoušení PINu hrubou silou.\\[-7.5mm]
+    \item Fyzická překážka kolem čipu karty ztěžující neautorizovaný přístup.\\[-7.5mm]
+    \item Odolnost proti útokům vyžadujícím fyzický přístup ke kartě.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Mezi základní nedostatky při snímání obličeje nepatří}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item nasazené kontaktní čočky.\\[-7.5mm]
+    \item pestré a barevné pozadí.\\[-7.5mm]
+    \item nasazená čepice.\\[-7.5mm]
+    \item zavřené oči.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Jaké vlastnosti má Shamirův protokol bez klíčů (Shamir’s no-key protocol)}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Nevyžaduje žádné ustavení sdílených klíčů\\[-7.5mm]
+    \item Vyžaduje komutativní šifrovací algoritmus\\[-7.5mm]
+    \item Funguje obzvláště dobře (a prokazatelně bezpečně) jen při použití One-Time Pad\\[-7.5mm]
+    \item Prokazuje, že P!=NP\\[-7.5mm]
+    \item Umožňuje vzájemnou autentizaci\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, b\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Co je to heslo založené na frázi?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Heslo, které obsahuje pouze malá písmena\\[-7.5mm]
+    \item Heslo založené na veřejně známé frázi, aby si jej všichni snadno zapamatovali\\[-7.5mm]
+    \item Heslo, které lze jednoduše přečíst\\[-7.5mm]
+    \item Pomůcka pro zapamatování složitého hesla\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Jaké vlastnosti mají magneto-optické čipové karty?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Umožňují snímání čárových kódů zobrazovaných na monitoru při vstupu do internetového bankovnictví a jejich okamžité zpracování v čipu.\\[-7.5mm]
+    \item Žádná z výše uvedených odpovědí.\\[-7.5mm]
+    \item Poskytují magneto-optické rozhraní pro vysokorychlostní a prokazatelně bezpečný přenos dat.\\[-7.5mm]
+    \item Neumožňují provádění kryptografických operací i přesto, že obsahují sofistikovanější magneto-optický proužek. Každá z dvou komunikujících stran má svůj symetrický klíč. \\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Kolik zpráv se vymění ve Shamirově protokolu bez klíčů, aby obě strany sdílely stejný klíč?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item 2\\[-7.5mm]
+    \item 4\\[-7.5mm]
+    \item 3\\[-7.5mm]
+    \item žádná z těchto odpovědi není správná\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: c\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Útok na čipové karty přes aplikační rozhraní (API) je založen na:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Využití chyby v návrhu rozhraní.\\[-7.5mm]
+    \item Nezamýšleném dopadu zpracování útočníkem zaslaných specifických vstupních dat.\\[-7.5mm]
+    \item Nedostupnosti aplikačního rozhraní vnitřnímu prostředí karty.\\[-7.5mm]
+    \item Využití indukce chyb do zpracování dat zaslaných přes aplikační rozhraní.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, b\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Které politiky řízení přístupu existují a používají se:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item asystematické řízení přístupu\\[-7.5mm]
+    \item volitelné řízení přístupu\\[-7.5mm]
+    \item povinné řízení přístupu\\[-7.5mm]
+    \item biometrické řízení provozu\\[-7.5mm]
+    \item skryté řízení přístupu\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b, c\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Ukládání hesel lze realizovat}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Hašovaně\\[-7.5mm]
+    \item Impulzně\\[-7.5mm]
+    \item V otevřené podobě\\[-7.5mm]
+    \item Šifrovaně\\[-7.5mm]
+    \item Hlasovaně\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, c, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Jaká je správná sekvence operací při ověřování PINu odolná proti přerušení napájení?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Zvýšení čítače, test čítače pokusů větší než 0, ověření korektnosti PINu, zvýšení čítače při dobrém PINu.\\[-7.5mm]
+    \item Test čítače pokusů větší než 0, snížení čítače, ověření korektnosti PINu, zvýšení čítače při dobrém PINu.\\[-7.5mm]
+    \item Test čítače pokusů větší než 0, zvýšení čítače, ověření korektnosti PINu, zvýšení čítače při dobrém PINu.\\[-7.5mm]
+    \item Test čítače pokusů větší než 0, ověření korektnosti PINu, snížení čítače při špatném PINu.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Co je to hašovací funkce?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Funkce, která mapuje libovolně velký vstup na výstup s délkou 128, 192, 256 nebo 512 bitů\\[-7.5mm]
+    \item Funkce, která mapuje libovolně velký vstup na výstup fixní délky a není prostá\\[-7.5mm]
+    \item Funkce, která mapuje libovolně velký vstup na výstup fixní délky a je prostá\\[-7.5mm]
+    \item Funkce, která mapuje vstup fixní délky na výstup variabilní délky (podle entropie vstupu)\\[-7.5mm]
+    \item Šifrovací funkce se schopností deprese vstupních dat\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Chybové hlášení o změně integritního součtu veřejného klíče serveru u SSH může být způsobeno ???}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Změnou dlouhodobého klíče serveru jeho administrátorem\\[-7.5mm]
+    \item Chybějícím záznamem veřejného klíče v souboru známých serverů\\[-7.5mm]
+    \item Podvržením serveru útočníkovým strojem\\[-7.5mm]
+    \item Změnou souboru s veřejným klíčem serveru na uživatelově PC ???\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, c\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Které z uvedených možností zajišťuje protokol IPsec?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Nepopiratelnost přijetí dat.\\[-7.5mm]
+    \item Důvěrnost dat, ochrana proti útoku přehráním.\\[-7.5mm]
+    \item Autentizace a integrita původu dat.\\[-7.5mm]
+    \item Podporu správy klíčů.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b, c, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Testování živosti obvykle nemá následující dopady}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item nepříjemné pocity brnění v oblasti testovaného vzorku.\\[-7.5mm]
+    \item zvýšený počet nesprávných odmítnutí.\\[-7.5mm]
+    \item zvýšení ceny zařízení.\\[-7.5mm]
+    \item vyšší náklady na vývoj a výrobu.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Při autentizaci tajnou informací je nutné dodržet}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Tajnou informaci musí vědět jen oprávněný uživatel\\[-7.5mm]
+    \item Tajnou informaci musíme sdělit administrátorovi pro případně admin. zásahy v našem systému\\[-7.5mm]
+    \item Z tajné informace se musí nejprve vytvořit inicializační vektor\\[-7.5mm]
+    \item Prostor, ze kterého vybíráme hodnotu tajné informace musí být rozsáhlý\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Která z uvedených tvrzení o řízení přístupu k datům na čipových kartách jsou pravdivá?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Data jsou uchována na magnetickém proužku a před použitím v čipu kontrolována.\\[-7.5mm]
+    \item Každý soubor má přiřazenu hlavičku s přístupovými právy.\\[-7.5mm]
+    \item Data na kartě nemohou být po zápisu nikdy čtena ani měněna.\\[-7.5mm]
+    \item Založeno především na řízení přístupu k souborům.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Co je to odpověď na narušení?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Žádná z výše uvedených odpovědí.\\[-7.5mm]
+    \item Služba internetového bankovnictví umožňující automaticky detekovat a upozornit na aktivní     nebezpečný software v počítači.\\[-7.5mm]
+    \item Reakce nechráněné části systému na potencionální útok.\\[-7.5mm]
+    \item Reakce chráněné části systému na probíhající pokus o útok.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Z hlediska lidské paměti je vhodné volit}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Složitá, ale snadno zapamatovatelná hesla\\[-7.5mm]
+    \item Jednoduchá a jednoduše zapamatovatelná hesla\\[-7.5mm]
+    \item Obtížně zapamatovatelná hesla a každý měsíc nutit uživatele ke změně\\[-7.5mm]
+    \item Hesla založená na frázích\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, b, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Pro urychlení počítačových systémů využívajících digitální podpis}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item u čipových karet bývají použity kryptografické koprocesory \\[-7.5mm]
+    \item používají obě strany identický privátní klíč \\[-7.5mm]
+    \item se často používá podchlazování ochranných komponent čipových karet \\[-7.5mm]
+    \item obvykle využíváme hašovací funkce pro reprezentaci podepisovaných dat \\[-7.5mm]
+    \item lze využít prokazatelnou odpovědnost metodou Monte Carlo\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Pro autentizaci v sítích GSM se používá:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item asymetrická kryptografie s protokolem RAND\\[-7.5mm]
+    \item dvoufaktorová autentizace – SIM a (nepovinný) PIN\\[-7.5mm]
+    \item jedno nebo dvoufaktorová autentizace podle nastavení PINu\\[-7.5mm]
+    \item Shamirův bezklíčový protokol\\[-7.5mm]
+    \item zero-knowledge protokol Fiat-Feige se čtyřmi faktory\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b, c\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Úspěšnost hádání hesel hrubou silou:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item klesá s velikostí použité abecedy\\[-7.5mm]
+    \item záleží na zapamatovatelnosti a struktuře hesla\\[-7.5mm]
+    \item roste s dobou platnosti hesla\\[-7.5mm]
+    \item ovlivnil výzkum Zvirana \& Hagy (1993)\\[-7.5mm]
+    \item klesá s délkou hesla\\[-7.5mm]
+    \item klesá s rostoucí rychlostí útočníkova počítače\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, c, e\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Offline verifikace karetní transakce:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item je zakalkulovaná v systému řízení rizik a provádí se pro snížení transakčních nákladů\\[-7.5mm]
+    \item se dnes již v bankomatech neprovádí\\[-7.5mm]
+    \item se za určitých podmínek provádí v PINpadu\\[-7.5mm]
+    \item vyžaduje přiblížení pasu s čipem podporujícím DDA k PINpadu\\[-7.5mm]
+    \item se používá jen v zemích Eurozóny (země platící eurem)\\[-7.5mm]
+    \item je povolena jen při biometrické autentizaci uživatele\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, b, c\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Terminologický nesmysl je:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item zajištění integrity dat pomocí hašovací funkce\\[-7.5mm]
+    \item kryptografické hašovací funkce mají být rychlé a jednosměrné\\[-7.5mm]
+    \item vodotisk hesla /etc/shadow \\[-7.5mm]
+    \item zaručený elektronický podpis založený na kvalifikovaném certifikátu\\[-7.5mm]
+    \item kryptace sdíleného souboru s ufopornem\\[-7.5mm]
+    \item kryptoanalýza zakryptovaného souboru\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: c, e, f\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Pro bezpečnostní úrovně modelu Bell-LaPadula L1=(TS,{obrana,ekonomika}) a L2=(S,{obrana}) platí:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item L1 a L2 jsou neporovnatelné\\[-7.5mm]
+    \item L1 dominuje L2\\[-7.5mm]
+    \item L2 dominuje L1\\[-7.5mm]
+    \item L1 a L2 jsou neporovnatelné, pokud neplatí exkluzivita *-vlastnosti\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Token s generátorem jednorázových hesel lze považovat za mechanismus dvoufaktorové autentizace:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item jen pokud se jím vygenerované heslo dá použít právě ve dvou autentizačních systémech\\[-7.5mm]
+    \item jen pokud se heslo generuje na základě dvou faktorizačních problémů\\[-7.5mm]
+    \item pokud se uživatel musí autentizovat vůči tokenu před jeho použitím svým heslem\\[-7.5mm]
+    \item pokud se uživatel musí autentizovat vůči tokenu před jeho použitím svým PINem\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: c, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Hybridní čipová karta}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item pracuje se dvěma různými čipy\\[-7.5mm]
+    \item je nyní výhradní technologií pro bankovní karetní operace\\[-7.5mm]
+    \item poskytuje možnost komunikace přes kontaktní i bezkontaktní rozhraní\\[-7.5mm]
+    \item je založena na využití kombinace asymetrické a symetrické kryptografie\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, c\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Dodatečná autorizace citlivých/významných operací se provádí obvykle:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item autorizací této operace klíčem z kořenového certifikátu \\[-7.5mm]
+    \item reputačním systémem bankovního dozorce \\[-7.5mm]
+    \item odděleným (separátním) kanálem \\[-7.5mm]
+    \item s použitím dalšího autorizačního kroku\\[-7.5mm]
+    \item SSL certifikátem s tzv. extended validation (EV)\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: c, d\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Která z následujících tvrzení o čipových kartách jsou pravdivá?}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item Bezkontaktní čipová karta potřebuje anténu pro komunikaci i získávání energie.\\[-7.5mm]
+    \item Komunikaci mezi čtečkou a bezkontaktní čipovou kartou lze odposlechnout.\\[-7.5mm]
+    \item Kontaktní čipová karta má vlastní zdroj energie a komunikuje se čtečkou přímo.\\[-7.5mm]
+    \item U bezkontaktní čipové karty je zajištěno autorizované smazání dat při výpadku napájecího napětí.\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: a, b\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara PIN je}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item s obvodním bankéřem sdílená informace\\[-7.5mm]
+    \item nejčastěji volen v hodnotách 1234, 0000, 0007 nebo 1111\\[-7.5mm]
+    \item doplňkovým bezpečnostním mechanismem pro operace s bankomatem\\[-7.5mm]
+    \item nastaven bankou jako haš hesla internetového bankovnictví\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b, c\\[-3mm]
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\textbf{ \mypara Mezi techniky pro zajištění soukromí v autentizačních systémech patří:}\\[-7.5mm]
+\begin{enumerate}[label={(\alph*)}]
+    \item maskování prvních 5 bajtů strojově čitelné zóny elektronických pasů\\[-7.5mm]
+    \item pravidelná změna identifikátoru čipu\\[-7.5mm]
+    \item uložení podepsaných hašů do EF.SO\_D elektronických pasů\\[-7.5mm]
+    \item pasivní rušení (Faradayova klec) čipu\\[-7.5mm]
+\end{enumerate}
+\textit{\textbf{Správně}}: b, d\\[-3mm]
+\end{minipage}
+
+\section*{Full text}
+
+\begin{enumerate}
+    \item Napište 2 výhody a 2 nevýhody autentizace biometrikou oproti jiné metodě.\\[-7.5mm]
+    \item Popište, jak probíhá man in the middle útok na Diffie-Hellman protokol.\\[-7.5mm]
+    \item Co jsou a jak fungují tokeny založené na hodinách? Jaké jsou jejich bezpečnostní nedostatky?\\[-7.5mm]
+    \item model Bell-LaPadula (nepamatuji si přesně)\\[-7.5mm]
+\end{enumerate}
+
+\hfill\\[-10mm]
+
+\begin{enumerate}
+    \item Statická autentizácia dát u EMV.\\[-7.5mm]
+    \item Výkonová analýza u čipových kariet.\\[-7.5mm]
+    \item Časové razítka.\\[-7.5mm]
+    \item Výhody a nevýhody autentizácie heslom.\\[-7.5mm]
+\end{enumerate}
+
+\hfill\\[-10mm]
+
+\begin{enumerate}
+    \item Popište, jak probíhá man in the middle útok na Diffie-Hellman protokol.\\[-7.5mm]
+    \item Popište stručně jak se provádí odběrová analýza u čipové karty.\\[-7.5mm]
+    \item Napište 2 výhody a 2 nevýhody autentizace biometrikou oproti jiné metodě.\\[-7.5mm]
+    \item Jak probíhá Shamirův protokol (přesné znění si nepamatuji).\\[-7.5mm]
+\end{enumerate}
+
+\end{document}
