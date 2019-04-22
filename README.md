@@ -1,4 +1,4 @@
-# [PV157 - Autentizace a řízení přístupu](https://is.muni.cz/predmet/fi/jaro2019/PV157)
+# [PV157 - Authentication and Access Control](https://is.muni.cz/predmet/fi/jaro2019/PV157)
 
 ### [PDF file](https://github.com/europ/MUNI-FI-PV157/blob/master/doc/doc.pdf)
 
