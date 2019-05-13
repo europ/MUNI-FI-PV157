@@ -2522,7 +2522,7 @@
 
     \begin{minipage}{\textwidth}
         \textbf{ \mypara Popište, jak probíhá man in the middle útok na Diffie-Hellman protokol.}\\
-        \TODO\\
+        Mallory (aktivní útočník provádějící útok man in the middle) může navázat dvě různé klíčové výměny, jednu s Alice a druhou s Bobem, účinně předstírá, že je Alice, k Bobovi, a naopak, což jí umožní dešifrovat, a pak zašifrovat zprávy mezi nimi. Všimněte si, že Mallory musí zůstat ve středu, přenášet zprávy pokaždé, když Alice a Bob komunikují. Pokud to někdy neudělá, její předchozí přítomnost je pak odhalena Alici a Bobovi. Budou vědět, že všechny jejich soukromé zprávy někdo zachytil a dekódoval.\\
     \end{minipage}
 
     \begin{minipage}{\textwidth}
@@ -2531,13 +2531,13 @@
     \end{minipage}
 
     \begin{minipage}{\textwidth}
-        \textbf{ \mypara model Bell-LaPadula (nepamatuji si přesně)}\\[2mm]
+        \textbf{ \mypara Model Bell-LaPadula.}\\[2mm]
         K zachování důvěrnosti citlivých dat. Procesy nesmějí zapisovat data do nižší úrovně. Procesy nesmějí číst data na vyšší úrovni.\\
     \end{minipage}
 
     \begin{minipage}{\textwidth}
         \textbf{ \mypara Statická autentizace dat u EMV.}\\[2mm]
-        \TODO\\
+        Potvrzuje pravost statických dat uložených v čipové kartě. Detekuje neautorizovanou změnu dat po personalizaci karty. Prováděna terminálem (čip pouze zasílá potřebná data).\\
     \end{minipage}
 
     \begin{minipage}{\textwidth}
@@ -2547,7 +2547,7 @@
 
     \begin{minipage}{\textwidth}
         \textbf{ \mypara Časové razítka.}\\[2mm]
-        \TODO\\
+        Časově proměnný parametr. Zajišťují jedinečnost a časovou přesnost. Obě strany musí synchronizovat a zabezpečit hodiny.\\
     \end{minipage}
 
     \begin{minipage}{\textwidth}
@@ -2561,28 +2561,36 @@
     \end{minipage}
 
     \begin{minipage}{\textwidth}
-        \textbf{ \mypara Popište, jak probíhá man in the middle útok na Diffie-Hellman protokol.}\\[2mm]
-        \TODO\\
-    \end{minipage}
-
-    \begin{minipage}{\textwidth}
         \textbf{ \mypara Popište stručně jak se provádí odběrová analýza u čipové karty.}\\[2mm]
-        Využívá se: Závislost průběhu odběru proudu na ukládaných datech do paměti EEPROM. Závislost průběhu odběru proudu na zpracovávaných datech. Závislost průběhu odběru proudu na prováděné instrukci.\\
+        Využívá se: Závislost průběhu odběru proudu na ukládaných datech do paměti EEPROM. Závislost průběhu odběru proudu na zpracovávaných datech. Závislost průběhu odběru proudu na prováděné instrukci. Dle toho můžeme zjistit, zda jsme zadali správné heslo nebo PIN.\\
     \end{minipage}
 
     \begin{minipage}{\textwidth}
-        \textbf{ \mypara Jak probíhá Shamirův protokol (přesné znění si nepamatuji).}\\[2mm]
-        \TODO\\
+        \textbf{ \mypara Jak probíhá Shamirův protokol.}\\[2mm]
+        Nevyžaduje žádné ustavení sdílených klíčů. Vyžaduje komutativní šifrovací algoritmus. Každá strana má svůj klíč. Aby obě strany měli stejnou informaci (klíč), musí si vyměnit 3 zprávy.\\
     \end{minipage}
 
     \begin{minipage}{\textwidth}
         \textbf{ \mypara Popište navzájem klady a zápory hesel a tokenů}\\[2mm]
-        \TODO\\
+        Token\\
+        \begin{itemize}
+            \item[\red{\textbf{+}}] Rychlé zjištění ztráty\\[-7.5mm]
+            \item[\red{\textbf{+}}] Mohou zpracovávat a přenášet další informace\\[-7.5mm]
+            \item[\blue{\textbf{--}}] Bez tokenu není autorizovaný uživatel rozpoznán\\[-7.5mm]
+            \item[\blue{\textbf{--}}] Ke kontrole je obvykle třeba speciální čtečka nebo vycvičená osoba\\
+        \end{itemize}
+        Heslo
+        \begin{itemize}
+            \item[\red{\textbf{+}}] Snadno zapamatovatelné a složité heslo je pro uživatele snadnou autentizací, pro útočníka naopak velice náročné uhodnout\\[-7.5mm]
+            \item[\red{\textbf{+}}] Nemusí tolik vypovídat o uživateli jako biometriky\\[-7.5mm]
+            \item[\blue{\textbf{--}}] Heslo je možné odposlechnout při autentizaci\\[-7.5mm]
+            \item[\blue{\textbf{--}}] Heslo můžeme zapomenout\\
+        \end{itemize}
     \end{minipage}
 
     \begin{minipage}{\textwidth}
         \textbf{ \mypara Napište a popište alespoň 2 autentizační primitiva.}\\[2mm]
-        \TODO : hash, heslo?\\
+        Hash (spočítána pomocí hašovací funkce z nějaké informace, například heslo), Heslo (obecný prostředek k autentizaci uživatele), PIN (doplňkový bezpečnostní mechanismus pro operace s bankomatem).\\
     \end{minipage}
 
 \end{document}
